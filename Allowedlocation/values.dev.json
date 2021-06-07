@@ -3,7 +3,8 @@
         "value": [
             "eastus",
             "eastus2",
-            "westus"
+            "westus",
+            "westeurope"
         ]
     }
 }
