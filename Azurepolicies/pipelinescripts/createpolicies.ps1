@@ -1,7 +1,7 @@
 write-host "all variable set successfully"
-$policyDefRootFolder = "$(Build.ArtifactStagingDirectory)/_test-CI/drop"
+$policyDefRootFolder = '$(Build.ArtifactStagingDirectory)/_test-CI/drop'
 $subscriptionName = "Pay-As-You-Go"
-
+write-host "all variable set successfully $($policyDefRootFolder)"
 class PolicyDef {
     [string]$PolicyName
     [string]$PolicyRulePath
