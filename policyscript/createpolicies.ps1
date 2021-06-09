@@ -1,4 +1,4 @@
-$policyDefRootFolder = '_test-CI/drop'
+$policyDefRootFolder = "_test-CI/drop"
 $subscriptionName = "Pay-As-You-Go"
 class PolicyDef {
     [string]$PolicyName
