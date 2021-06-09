@@ -1,4 +1,4 @@
-$policyDefRootFolder = "C:\Users\nbn45278\OneDrive - GSK\azure-policy-automation\ccoe-secure-cloud-azure_policies\Test-devops-policies"
+$policyDefRootFolder = "$(System.DefaultWorkingDirectory)/policies/drop"
 $subscriptionName = "Pay-As-You-Go"
 
 class PolicyDef {
