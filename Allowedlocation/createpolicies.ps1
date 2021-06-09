@@ -1,4 +1,3 @@
-$policyDefRootFolder = "$(System.DefaultWorkingDirectory)/policies/drop"
 $subscriptionName = "Pay-As-You-Go"
 
 class PolicyDef {
