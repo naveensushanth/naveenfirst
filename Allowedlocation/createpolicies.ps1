@@ -1,4 +1,4 @@
-$policyDefRootFolder = "$env:System.DefaultWorkingDirectory"
+$policyDefRootFolder = "$(Build.SourcesDirectory)"
 $subscriptionName = "Pay-As-You-Go"
 
 class PolicyDef {
