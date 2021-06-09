@@ -1,6 +1,6 @@
 $policyDefRootFolder = "$(System.DefaultWorkingDirectory)/policies/drop"
 $subscriptionName = "Pay-As-You-Go"
-
+write-host "all variable set successfully"
 class PolicyDef {
     [string]$PolicyName
     [string]$PolicyRulePath
@@ -41,13 +41,13 @@ function Add-Policies {
     Write-Verbose "Creating policy definitions"
     $policyDefList = @()
     foreach ($policy in $Policies) {
-        $policyDef = New-AzureRmPolicyDefinition -Name $policy.PolicyName -Policy $policy.PolicyRulePath -Parameter $policy.PolicyParamPath -SubscriptionId $subscriptionId -Metadata '{"category":"Pipeline"}'
+        $policyDef = New-AzPolicyDefinition -Name $policy.PolicyName -Policy $policy.PolicyRulePath -Parameter $policy.PolicyParamPath -SubscriptionId $subscriptionId -Metadata '{"category":"Pipeline"}'
         $policyDefList += $policyDef
     }
     return $policyDefList
 }
 
-$subscriptionId = (Get-AzureRmSubscription -SubscriptionName $subscriptionName).Id
+$subscriptionId = (Get-AzSubscription -SubscriptionName $subscriptionName).Id
 Write-Verbose $policyDefRootFolder
 Write-Verbose $subscriptionId
 
