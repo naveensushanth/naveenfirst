@@ -1,0 +1,10 @@
+{
+    "listofAllowedLocations": {
+        "value": [
+            "eastus",
+            "eastus2",
+            "westus",
+            "westeurope"
+        ]
+    }
+}
