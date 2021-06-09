@@ -1,5 +1,6 @@
 $policyDefRootFolder = "_test-CI/drop"
 $subscriptionName = "Pay-As-You-Go"
+
 class PolicyDef {
     [string]$PolicyName
     [string]$PolicyRulePath
@@ -20,8 +21,8 @@ function Select-Policies {
     foreach ($policyDefinition in $PolicyFolders) {
         $policy = New-Object -TypeName PolicyDef
         $policy.PolicyName = $policyDefinition.Name
-        $policy.PolicyRulePath = '$($policyDefinition.FullName  + "\policydef.json")'
-        $policy.PolicyParamPath = '$($policyDefinition.FullName  + "\policydef.params.json")'
+        $policy.PolicyRulePath = $($policyDefinition.FullName  + "\policydef.json")
+        $policy.PolicyParamPath = $($policyDefinition.FullName + "\policydef.params.json")
         $policyList += $policy
     }
 
@@ -40,13 +41,13 @@ function Add-Policies {
     Write-Verbose "Creating policy definitions"
     $policyDefList = @()
     foreach ($policy in $Policies) {
-       $policyDef = New-AzPolicyDefinition -Name $policy.PolicyName -Policy $policy.PolicyRulePath -Parameter $policy.PolicyParamPath -SubscriptionId $subscriptionId -Metadata '{"category":"Pipeline"}'
+        $policyDef = New-AzureRmPolicyDefinition -Name $policy.PolicyName -Policy $policy.PolicyRulePath -Parameter $policy.PolicyParamPath -SubscriptionId $subscriptionId -Metadata '{"category":"Pipeline"}'
         $policyDefList += $policyDef
     }
     return $policyDefList
 }
 
-$subscriptionId = (Get-AzSubscription -SubscriptionName $subscriptionName).Id
+$subscriptionId = (Get-AzureRmSubscription -SubscriptionName $subscriptionName).Id
 Write-Verbose $policyDefRootFolder
 Write-Verbose $subscriptionId
 
