@@ -22,6 +22,7 @@ function Select-Policies {
         $policy = New-Object -TypeName PolicyDef
         $policy.PolicyName = $policyDefinition.Name
         $policy.PolicyRulePath = $($policyDefinition.FullName  + "\policydef.json")
+        write-host "check policy rule path '$($policy.PolicyRulePath)'"
         $policy.PolicyParamPath = $($policyDefinition.FullName + "\policydef.params.json")
         $policyList += $policy
     }
