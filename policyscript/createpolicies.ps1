@@ -1,8 +1,8 @@
 Param(
 [String]$policyDefRootFolder,
-[String]$subscriptionName 
+[String]$subscriptionName,
+[String]$ManagementGroupName 
 )
-
 class PolicyDef {
     [string]$PolicyName
     [string]$PolicyRulePath
@@ -44,7 +44,13 @@ function Add-Policies {
     Write-Verbose "Creating policy definitions"
     $policyDefList = @()
     foreach ($policy in $Policies) {
+        if($null -ne $subscriptionId)
+        {
         $policyDef = New-AzPolicyDefinition -Name $policy.PolicyName -Policy $policy.PolicyRulePath -Parameter $policy.PolicyParamPath -SubscriptionId $subscriptionId -Metadata '{"category":"Pipeline"}'
+        }
+        else{
+         $policyDef = New-AzPolicyDefinition -Name $policy.PolicyName -Policy $policy.PolicyRulePath -Parameter $policy.PolicyParamPath -ManagementGroupName $ManagementGroupName -Metadata '{"category":"Pipeline"}'   
+        }
         $policyDefList += $policyDef
     }
     return $policyDefList
