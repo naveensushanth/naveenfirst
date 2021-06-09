@@ -22,8 +22,8 @@ function Select-Policies {
     foreach ($policyDefinition in $PolicyFolders) {
         $policy = New-Object -TypeName PolicyDef
         $policy.PolicyName = $policyDefinition.Name
-        $policy.PolicyRulePath = $($policyDefinition.FullName  + "\policydef.json")
-        $policy.PolicyParamPath = $($policyDefinition.FullName  + "\policydef.params.json")
+        $policy.PolicyRulePath = '$($policyDefinition.FullName  + "\policydef.json")'
+        $policy.PolicyParamPath = '$($policyDefinition.FullName  + "\policydef.params.json")'
         $policyList += $policy
     }
 
