@@ -44,6 +44,7 @@ function Add-Policies {
     Write-Verbose "Creating policy definitions"
     $policyDefList = @()
     foreach ($policy in $Policies) {
+    write-host "all variable set successfully $($policy.PolicyRulePath)"
         $policyDef = New-AzPolicyDefinition -Name $policy.PolicyName -Policy $policy.PolicyRulePath -Parameter $policy.PolicyParamPath -SubscriptionId $subscriptionId -Metadata '{"category":"Pipeline"}'
         $policyDefList += $policyDef
     }
