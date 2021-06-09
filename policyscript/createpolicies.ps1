@@ -25,7 +25,7 @@ function Select-Policies {
         write-host "all variable set successfully $($policyDefinition.Name)"
         $policy.PolicyRulePath = '$($policyDefinition.FullName  + "\policydef.json")'
         $policy.PolicyParamPath = '$($policyDefinition.FullName  + "\policydef.params.json")'
-        write-host "all variable set successfully $($policy.PolicyParamPath)"
+        write-host "all variable set successfully $($policyDefinition.FullName)"
         $policyList += $policy
     }
 
