@@ -55,8 +55,10 @@ function Add-Policies {
     }
     return $policyDefList
 }
-
+if($null -ne $subscriptionName)
+{
 $subscriptionId = (Get-AzSubscription -SubscriptionName $subscriptionName).Id
+}
 Write-Verbose $policyDefRootFolder
 Write-Verbose $subscriptionId
 
