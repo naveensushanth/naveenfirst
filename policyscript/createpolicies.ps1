@@ -1,7 +1,7 @@
 write-host "all variable set successfully"
 $policyDefRootFolder = '_test-CI/drop'
 $subscriptionName = "Pay-As-You-Go"
-write-host "all variable set successfully $($policyDefRootFolder)"
+write-host "all variable set successfully '$($policyDefRootFolder)'"
 class PolicyDef {
     [string]$PolicyName
     [string]$PolicyRulePath
@@ -22,10 +22,10 @@ function Select-Policies {
     foreach ($policyDefinition in $PolicyFolders) {
         $policy = New-Object -TypeName PolicyDef
         $policy.PolicyName = $policyDefinition.Name
-        write-host "all variable set successfully $($policyDefinition.Name)"
+        write-host "all variable set successfully '$($policyDefinition.Name)'"
         $policy.PolicyRulePath = '$($policyDefinition.FullName  + "\policydef.json")'
         $policy.PolicyParamPath = '$($policyDefinition.FullName  + "\policydef.params.json")'
-        write-host "all variable set successfully $($policyDefinition.FullName)"
+        write-host "all variable set successfully '$($policyDefinition.FullName)'"
         $policyList += $policy
     }
 
