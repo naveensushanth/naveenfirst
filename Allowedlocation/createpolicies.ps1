@@ -1,4 +1,4 @@
-$policyDefRootFolder = "$(build.artifactstagingdirectory)/drop"
+$policyDefRootFolder = "$(System.DefaultWorkingDirectory)/drop"
 $subscriptionName = "Pay-As-You-Go"
 
 class PolicyDef {
