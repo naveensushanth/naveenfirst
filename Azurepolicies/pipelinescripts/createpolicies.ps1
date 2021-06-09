@@ -1,4 +1,4 @@
-$policyDefRootFolder = "$(System.DefaultWorkingDirectory)/policies/drop"
+$policyDefRootFolder = "'$($System.DefaultWorkingDirectory))'/_test-CI/drop"
 $subscriptionName = "Pay-As-You-Go"
 write-host "all variable set successfully"
 class PolicyDef {
