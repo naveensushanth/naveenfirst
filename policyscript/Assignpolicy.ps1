@@ -1,7 +1,7 @@
 Param(
 [String]$policyDefRootFolder,
 [Parameter(Mandatory = $false)][String]$Subscriptionname,
-[Parameter(Mandatory = $false)][String]$policyAssignmentRG 
+[Parameter(Mandatory = $false)][String]$policyAssignmentRG = $null
 )
 $policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
 write-host "set parameters '$($policyDefRootFolder)' & '$($policyObjs)'"
