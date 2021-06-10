@@ -4,7 +4,8 @@ Param(
 [Parameter(Mandatory = $false)][String]$policyAssignmentRG = $null
 )
 $policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
-write-host "set parameters '$($policyDefRootFolder)' & '$($policyObjs)'"
+write-host "set parameters '$($policyDefRootFolder)' & '$($env:POLICYDEFS)'"
+write-host "set parameters '$($policyAssignmentRG)'"
 if($policyAssignmentRG -ne $null){
 write-host "wrong loop"
 $resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
