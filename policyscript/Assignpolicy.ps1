@@ -1,9 +1,10 @@
-$policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
 Param(
 [String]$policyDefRootFolder,
 [Parameter(Mandatory = $false)][String]$Subscriptionname,
 [Parameter(Mandatory = $false)][String]$policyAssignmentRG 
 )
+$policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
+
 if($null -ne $policyAssignmentRG){
 $resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
 }
