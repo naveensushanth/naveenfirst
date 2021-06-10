@@ -6,6 +6,7 @@ Param(
 $policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
 write-host "set parameters '$($policyDefRootFolder)' & '$($policyObjs)'"
 if($null -ne $policyAssignmentRG){
+write-host "wrong loop"
 $resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
 }
 
@@ -17,7 +18,8 @@ foreach ($policyDefFolder in (Get-ChildItem -Path $policyDefRootFolder -Director
 
     Write-Host Processing folder: $policyDefFolder.Name
     $selected = $policyObjs | Where-Object { $_.Name -eq $policyDefFolder.Name }
-    Write-Host Creating assignment for: $selectedObj
+    
+    Write-Host "Creating assignment for: '$($selected)'"
    if($null -ne $resourcegroupID)
    {
     New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope $resourcegroupID -PolicyParameter  "$($policyDefFolder.FullName)\values.$(Release.EnvironmentName).json"
