@@ -21,6 +21,7 @@ write-host "This assignment is for Resource group level"
 }
 else
 {
+write-host "wrong loop"
 $SubscriptionId = ((Get-AzSubscription -SubscriptionName $Subscriptionname).Id)
 }
 
