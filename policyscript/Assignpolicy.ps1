@@ -8,6 +8,6 @@ foreach ($policyDefFolder in (Get-ChildItem -Path $policyDefRootFolder -Director
     $selected = $policyObjs | Where-Object { $_.Name -eq $policyDefFolder.Name }
     Write-Host Creating assignment for: $selected
     write-host "select release environment '$($Release.EnvironmentName))'"
-    New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId) -PolicyParameter  "$($policyDefFolder.FullName)\values.$(Release.EnvironmentName).json"
+    New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId) -PolicyParameter  "$($policyDefFolder.FullName)\values.dev.json"
 
 }
