@@ -1,6 +1,8 @@
+param(
+[String]$policyAssignmentRG,
+[String]$policyDefRootFolder
+)
 $policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
-$policyAssignmentRG = "test"
-$policyDefRootFolder = "_test-CI/drop"
 
 $resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
 
