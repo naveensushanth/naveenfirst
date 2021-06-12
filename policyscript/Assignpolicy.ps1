@@ -4,6 +4,9 @@ param(
 [Parameter(Mandatory=$false)][String]$subscriptionname
 )
 $policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
+$policyresourcegroup = $policyAssignmentRG
+$policysubscriptionname = $subscriptionname
+write-host "'$($policyresourcegroup)' and '$($policysubscriptionname)'"
 if($policyAssignmentRG.count -ne 0)
 {
 Write-host "'$($policyAssignmentRG)'"
