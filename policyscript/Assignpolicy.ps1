@@ -7,8 +7,8 @@ $policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
 $policyresourcegroup = $policyAssignmentRG
 $policysubscriptionname = $subscriptionname
 write-host "'$($policyresourcegroup)' and '$($policysubscriptionname)'"
-write-host $policyresourcegroup and $policyresourcegroup.count
-write-host $policysubscriptionname and $policysubscriptionname.count
+write-host [bool]$policyresourcegroup and $policyresourcegroup.count
+write-host [bool]$policysubscriptionname and $policysubscriptionname.count
 if($policyAssignmentRG.count -ne 0)
 {
 Write-host "'$($policyAssignmentRG)'"
