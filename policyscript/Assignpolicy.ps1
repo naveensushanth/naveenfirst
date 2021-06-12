@@ -10,13 +10,13 @@ write-host "'$($policyresourcegroup)' and '$($policysubscriptionname)'"
 if($policyAssignmentRG.count -ne 0)
 {
 Write-host "'$($policyAssignmentRG)'"
-write-host $policyAssignmentRG.count
+write-host resource group $policyAssignmentRG.count
 $resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
 }
 if($subscriptionname.count -ne 0)
 {
 Write-host "'$($subscriptionname)'"
-write-host $subscriptionname.count
+write-host subscription name: $subscriptionname.count
 $Subscription = Get-AzSubscription -SubscriptionName $subscriptionname
 
 }
