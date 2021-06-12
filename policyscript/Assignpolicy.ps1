@@ -7,15 +7,15 @@ $policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
 $policyresourcegroup = $policyAssignmentRG
 $policysubscriptionname = $subscriptionname
 write-host "'$($policyresourcegroup)' and '$($policysubscriptionname)'"
-write-host [bool]$policyresourcegroup and $policyresourcegroup.count
-write-host [bool]$policysubscriptionname and $policysubscriptionname.count
-if($policyAssignmentRG.count -ne 0)
+write-host $policyresourcegroup and $policyresourcegroup.count
+write-host $policysubscriptionname and $policysubscriptionname.count
+if($policyAssignmentRG -ne false)
 {
 Write-host "'$($policyAssignmentRG)'"
 write-host resource group $policyAssignmentRG.count
 $resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
 }
-if($subscriptionname.count -ne 0)
+if($subscriptionname -ne false)
 {
 Write-host "'$($subscriptionname)'"
 write-host subscription name: $subscriptionname.count
