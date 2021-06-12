@@ -13,7 +13,7 @@ foreach ($policyDefFolder in (Get-ChildItem -Path $policyDefRootFolder -Director
     
     Write-Host "Creating assignment for: '$($selected)'"
    
-    New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId) -PolicyParameter  "$($policyDefFolder.FullName)\values.$(Release.EnvironmentName).json"
+    New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId) -PolicyParameter  "$($policyDefFolder.FullName)\values.dev.json"
 
    
 }
