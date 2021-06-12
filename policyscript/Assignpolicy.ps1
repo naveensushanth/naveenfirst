@@ -1,16 +1,20 @@
 Param(
 [String]$policyDefRootFolder,
 [Parameter(Mandatory = $false)][String]$Subscriptionname,
-[Parameter(Mandatory = $false)][String]$policyAssignmentRG = $null
+[Parameter(Mandatory = $false)][String]$policyAssignmentRG = ''
 )
 $policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
 write-host "set parameters '$($policyDefRootFolder)' & '$($env:POLICYDEFS)'"
 write-host "set parameters '$($policyAssignmentRG)'"
 
+if($null -ne $policyAssignmentRG or $policyAssignmentRG -ne ''){
+write-host "wrong loop"
+$resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
+}
+
 if($null -ne $Subscriptionname){
 $SubscriptionId = ((Get-AzSubscription -SubscriptionName $Subscriptionname).Id)
 }
-
 
 foreach ($policyDefFolder in (Get-ChildItem -Path $policyDefRootFolder -Directory)) {
 
@@ -18,9 +22,9 @@ foreach ($policyDefFolder in (Get-ChildItem -Path $policyDefRootFolder -Director
     $selected = $policyObjs | Where-Object { $_.Name -eq $policyDefFolder.Name }
     
     Write-Host "Creating assignment for: '$($selected)'"
-   if($null -ne $policyAssignmentRG)
+   if($null -ne $resourcegroupID)
    {
-    New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId) -PolicyParameter  "$($policyDefFolder.FullName)\values.$(Release.EnvironmentName).json"
+    New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope $resourcegroupID -PolicyParameter  "$($policyDefFolder.FullName)\values.$(Release.EnvironmentName).json"
 
    }
    else{
