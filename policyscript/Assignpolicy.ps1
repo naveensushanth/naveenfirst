@@ -7,13 +7,13 @@ $policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
 write-host "set parameters '$($policyDefRootFolder)' & '$($env:POLICYDEFS)'"
 write-host "set parameters '$($policyAssignmentRG)'"
 
+if($null -ne $Subscriptionname){
+$SubscriptionId = ((Get-AzSubscription -SubscriptionName $Subscriptionname).Id)
+}
+
 if($null -ne $policyAssignmentRG){
 write-host "wrong loop"
 $resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
-}
-
-if($null -ne $Subscriptionname){
-$SubscriptionId = ((Get-AzSubscription -SubscriptionName $Subscriptionname).Id)
 }
 
 foreach ($policyDefFolder in (Get-ChildItem -Path $policyDefRootFolder -Directory)) {
