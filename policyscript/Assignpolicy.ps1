@@ -6,10 +6,12 @@ param(
 $policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
 if($policyAssignmentRG -ne $null)
 {
+Write-host "'$($policyAssignmentRG)'"
 $Subscription = Get-AzSubscription -SubscriptionName $subscriptionname
 }
 if($subscriptionname -ne $null)
 {
+Write-host "'$($subscriptionname)'"
 $resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
 }
 foreach ($policyDefFolder in (Get-ChildItem -Path $policyDefRootFolder -Directory)) {
@@ -20,9 +22,12 @@ foreach ($policyDefFolder in (Get-ChildItem -Path $policyDefRootFolder -Director
     write-host "select release environment '$($Release.EnvironmentName))'"
     if ($resourcegroupID -ne $null)
     {
+    Write-host "inside forloop '$($policyAssignmentRG)'"
     New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope $resourcegroupID -PolicyParameter  "$($policyDefFolder.FullName)\values.dev.json"
-    }else
+    }
+    if($Subscription -ne $null)
     {
+    Write-host "inside for loop1 '$($subscriptionname)'"
     New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope "/subscriptions/$($Subscription.Id)" -PolicyParameter  "$($policyDefFolder.FullName)\values.dev.json"
     }
 }
