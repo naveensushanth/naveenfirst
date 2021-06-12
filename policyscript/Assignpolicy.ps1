@@ -4,15 +4,16 @@ param(
 [Parameter(Mandatory=$false)][String]$subscriptionname
 )
 $policyObjs = ConvertFrom-Json -InputObject $env:POLICYDEFS
-if($policyAssignmentRG -ne $null)
+if($policyAssignmentRG.count -ne 0)
 {
 Write-host "'$($policyAssignmentRG)'"
-$Subscription = Get-AzSubscription -SubscriptionName $subscriptionname
+$resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
 }
-if($subscriptionname -ne $null)
+if($subscriptionname.count -ne 0)
 {
 Write-host "'$($subscriptionname)'"
-$resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
+$Subscription = Get-AzSubscription -SubscriptionName $subscriptionname
+
 }
 foreach ($policyDefFolder in (Get-ChildItem -Path $policyDefRootFolder -Directory)) {
 
