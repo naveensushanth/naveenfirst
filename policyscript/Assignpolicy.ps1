@@ -8,11 +8,19 @@ write-host "set parameters '$($policyDefRootFolder)' & '$($env:POLICYDEFS)'"
 write-host "set parameters '$($policyAssignmentRG)'"
 
 if($null -eq $policyAssignmentRG ){
-write-host "wrong loop"
+write-host "This assignment is for Subscription level"
+
+}else
+{
 $resourcegroupID = ((Get-AzResourceGroup -Name $policyAssignmentRG).ResourceId)
 }
 
 if($null -eq $Subscriptionname){
+write-host "This assignment is for Resource group level"
+
+}
+else
+{
 $SubscriptionId = ((Get-AzSubscription -SubscriptionName $Subscriptionname).Id)
 }
 
