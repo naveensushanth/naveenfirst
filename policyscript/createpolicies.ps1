@@ -64,6 +64,7 @@ Write-Verbose $subscriptionId
 
 #get list of policy folders
 $policies = Select-Policies -PolicyFolders (Get-ChildItem -Path $policyDefRootFolder -Directory)
+write-host $policies
 $policyDefinitions = Add-Policies -Policies $policies -subscriptionId $subscriptionId
 $policyDefsJson = ($policyDefinitions | ConvertTo-Json -Depth 10 -Compress)
 
