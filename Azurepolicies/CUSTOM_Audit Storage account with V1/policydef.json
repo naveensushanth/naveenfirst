@@ -1,17 +1,56 @@
 {
-  "if": {
-    "allOf": [
-      {
-        "field": "location",
-        "notIn": "[parameters('listofAllowedLocations')]"
-      },
-      {
-        "field": "type",
-        "equals": "Microsoft.Resources/subscriptions/resourceGroups"
-      }
-    ]
-  },
-  "then": {
-    "effect": "audit"
-  }
-}
+    
+        "policyRule": {
+            "if": {
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Compute/virtualMachines"
+                    },
+                    {
+                        "field": "Microsoft.Compute/virtualMachines/diagnosticsProfile.bootDiagnostics.enabled",
+                        "exists": "false"
+                    },
+                    {
+                        "field": "Microsoft.Compute/imagePublisher",
+                        "notIn": [
+                            "microsoft-aks",
+                            "AzureDatabricks",
+                            "databricks",
+                            "Microsoft.AKS",
+                            "paloaltonetworks"
+                        ]
+                    },
+                    {
+                        "field": "Microsoft.Resources/subscriptions/resourceGroups.name",
+                        "notlike": "databricks*"
+                    }
+                ]
+            },
+            "then": {
+                "effect": "modify",
+                "details": {
+                    "operations": [
+                        {
+                            "operation": "add",
+                            "field": "Microsoft.Compute/virtualMachines/diagnosticsProfile",
+                            "value": {}
+                        },
+                        {
+                            "operation": "add",
+                            "field": "Microsoft.Compute/virtualMachines/diagnosticsProfile.bootDiagnostics",
+                            "value": {}
+                        },
+                        {
+                            "operation": "add",
+                            "field": "Microsoft.Compute/virtualMachines/diagnosticsProfile.bootDiagnostics.enabled",
+                            "value": true
+                        }
+                    ],
+                    "roleDefinitionIds": [
+                        "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+                    ]
+                }
+            }
+        }
+    }
