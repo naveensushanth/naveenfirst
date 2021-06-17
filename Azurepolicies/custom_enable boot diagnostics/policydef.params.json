@@ -1,5 +1,8 @@
 {
-    "parameters": {
-        
-    }
+	"effect": {
+		"type": "String",
+		"metadata": {
+			"displayName": "Enable boot diagnostics"
+		}
+	}
 }
