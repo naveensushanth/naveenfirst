@@ -31,11 +31,11 @@ foreach ($policyDefFolder in (Get-ChildItem -Path $policyDefRootFolder -Director
     if ($resourcegroupID -ne $null)
     {
     Write-host "inside forloop '$($policyAssignmentRG)'"
-    New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope $resourcegroupID -PolicyParameter  "$($policyDefFolder.FullName)\values.dev.json"
+    New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope $resourcegroupID -PolicyParameter  "$($policyDefFolder.FullName)\values.dev.json" -Location 'eastus' -AssignIdentity
     }
     if($Subscription -ne $null)
     {
     Write-host "inside for loop1 '$($subscriptionname)'"
-    New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope "/subscriptions/$($Subscription.Id)" -PolicyParameter  "$($policyDefFolder.FullName)\values.dev.json"
+    New-AzPolicyAssignment -Name $policyDefFolder.Name -PolicyDefinition $selected -Scope "/subscriptions/$($Subscription.Id)" -PolicyParameter  "$($policyDefFolder.FullName)\values.dev.json" -Location 'eastus' -AssignIdentity
     }
 }
