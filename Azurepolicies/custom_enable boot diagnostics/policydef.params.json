@@ -1,6 +1,8 @@
-"parameters": {
-"effect":{
-"type": "String",
-"defaultvalue": "modify"
-}
+{
+    "parameters": {
+        "effect": {
+            "type": "String",
+            "defaultvalue": "modify"
+        }
+    }
 }
